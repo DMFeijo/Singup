@@ -50,19 +50,18 @@ describe('singup', () => {
     cy.get('#confirmPassword').type('senha123')
     cy.get('.LoaderButton').should('be.visible')
     cy.get('.LoaderButton').click()
-    
+
   })
   it.only('Cadastro com e-mail existente', () => {
     // Certifique-se de que um usuário com o mesmo e-mail já existe no sistema
-    // e use esse e-mail no teste
     cy.url().should('include', 'signup')
     cy.get('#email').type('Nettie48@gmail.com')
     cy.get('#password').type('senha123')
     cy.get('#confirmPassword').type('senha123')
     cy.get('.LoaderButton').should('be.visible')
     cy.get('.LoaderButton').click()
-    
+    cy.url().should('include', '/signup')
+
   })
-  
 })
 
