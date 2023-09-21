@@ -67,8 +67,8 @@ describe('singup', () => {
     cy.generateRandomUserData().then(userData => {
       cy.url().should('include', 'signup')
       cy.get('#email').type(userData.email)
-      cy.get('#password').type('abc') // Senha curta (menos de 8 caracteres)
-      cy.get('#confirmPassword').type('abc') // Senha curta (menos de 8 caracteres)
+      cy.get('#password').type('abc')
+      cy.get('#confirmPassword').type('abc') 
       cy.get('.LoaderButton').should('be.visible')
       cy.get('.LoaderButton').click()
       cy.url().should('include', '/signup')
