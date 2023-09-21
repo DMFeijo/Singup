@@ -52,7 +52,7 @@ describe('singup', () => {
     cy.get('.LoaderButton').click()
 
   })
-  it.only('Cadastro com e-mail existente', () => {
+  it('Cadastro com e-mail existente', () => {
     // Certifique-se de que um usuário com o mesmo e-mail já existe no sistema
     cy.url().should('include', 'signup')
     cy.get('#email').type('Nettie48@gmail.com')
@@ -62,6 +62,26 @@ describe('singup', () => {
     cy.get('.LoaderButton').click()
     cy.url().should('include', '/signup')
 
+  })
+  it('Cadastro com senha curta', () => {
+    cy.generateRandomUserData().then(userData => {
+      cy.url().should('include', 'signup')
+      cy.get('#email').type(userData.email)
+      cy.get('#password').type('abc') // Senha curta (menos de 8 caracteres)
+      cy.get('#confirmPassword').type('abc') // Senha curta (menos de 8 caracteres)
+      cy.get('.LoaderButton').should('be.visible')
+      cy.get('.LoaderButton').click()
+      cy.url().should('include', '/signup')
+    })
+  })
+  it('Cadastro com senhas diferentes (comprimento adequado)', () => {
+    cy.generateRandomUserData().then(userData => {
+      cy.url().should('include', 'signup')
+      cy.get('#email').type(userData.email)
+      cy.get('#password').type('senha123')
+      cy.get('#confirmPassword').type('Senha456') // Senhas diferentes
+      cy.get('.LoaderButton').should('not.be.enabled')
+    })
   })
 })
 

@@ -1,5 +1,3 @@
-// support/commands.js
-
 const faker = require('faker');
 
 Cypress.Commands.add('generateRandomUserData', () => {
